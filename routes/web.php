@@ -20,7 +20,10 @@ Auth::routes(['verify'=>true]);
 Route::get('/home', 'HomeController@index')->name('home')->middleware('verified');
 
 
+// Socialite FB
 
+Route::get('/redirect/{service}', 'SocialController@redirectfb');
+Route::get('/callback/{service}', 'SocialController@callback');
 
 
 
