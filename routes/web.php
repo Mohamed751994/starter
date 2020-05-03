@@ -35,10 +35,12 @@ Route::get('/callback/{service}', 'SocialController@callback');
 
 
 
+Route::group(['prefix' => LaravelLocalization::setLocale(), 'middleware' => [ 'localeSessionRedirect', 'localizationRedirect', 'localeViewPath' ]], function(){
+  Route::get('/articles', 'ArticleController@index')->name('articles.index');
+  Route::get('/articles/create', 'ArticleController@create')->name('articles.create');
+  Route::get('/articles/{article}', 'ArticleController@show')->name('articles.show');
+  Route::get('/articles/edit/{article}', 'ArticleController@edit')->name('articles.edit');
 
-Route::get('/articles', 'ArticleController@index')->name('articles.index');
-Route::get('/articles/create', 'ArticleController@create')->name('articles.create');
+});
 Route::post('/articles/store', 'ArticleController@store')->name('articles.store');
-Route::get('/articles/{article}', 'ArticleController@show')->name('articles.show');
-Route::get('/articles/edit/{article}', 'ArticleController@edit')->name('articles.edit');
 Route::put('/articles/{article}', 'ArticleController@update')->name('articles.update');
